@@ -1,10 +1,82 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #cec9c9;
+}
 
+#root {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.App {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+header {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background-color: rgb(27, 27, 58);
+  box-shadow: 5px 0 10px #6b6b6b, 2px 0 2px #313131;
+}
+
+nav {
+  width: 100%;
+  max-width: 1580px;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5rem;
+}
+
+nav img {
+  width: 150px;
+}
+
+nav a, nav button {
+  text-decoration: none;
+  color: #fff;
+  background: transparent;
+  font-size: 1.1rem;
+  padding: .5rem 1rem;
+  border-radius: 5px;
+  font-weight: 600;
+  border: 2px solid #fff;
+  transition: all .2s ease-in-out;
+}
+
+nav a:hover, nav button:hover {
+  background: #fff;
+  color: #000;
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  background: rgb(27, 27, 58);
+  color: #fff;
+  width: 100%;
+  margin-top: auto;
+  text-align: center;
+}

@@ -8,43 +8,36 @@ import Dashboarrd from "./Dashboarrd";
 import Profile from "./Profile";
 import Layout from "./Layout";
 function App() {
-
   const router = createBrowserRouter([
     {
       path: "/",
       element: <Layout />,
       children: [
         {
-          path: "/dashboard",
-          element: <Dashboarrd />
+          path: "/",
+          element: <Dashboarrd />,
         },
         {
           path: "/profile",
-          element: <Profile />
+          element: <Profile />,
         },
-      ]
+      ],
     },
     {
       path: "/signup",
-      element: <Signup />
+      element: <Signup />,
     },
     {
       path: "/login",
-      element: <Login />
+      element: <Login />,
     },
-  ])
+  ]);
 
   return (
     <AuthProvider>
-      <Container
-        className="d-flex align-items-center justify-content-center"
-        style={{ minHeight: "100vh" }}
-      >
-        <div className="w-100" style={{ maxWidth: "400px" }}>
-          <RouterProvider router = {router} />
-        </div>
-      </Container>
-
+      <div className="App">
+        <RouterProvider router={router} />
+      </div>
     </AuthProvider>
   );
 }

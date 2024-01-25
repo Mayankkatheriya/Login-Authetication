@@ -1,40 +1,42 @@
-import React, { useRef, useState } from "react"
-import { Form, Button, Card, Alert } from "react-bootstrap"
-import { useAuth } from "../Context/AuthProvider"
-import { Link, useNavigate } from "react-router-dom"
+import React, { useRef, useState } from "react";
+import { Form, Button, Card, Alert } from "react-bootstrap";
+import { useAuth } from "../Context/AuthProvider";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
-  const emailRef = useRef()
-  const passwordRef = useRef()
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
+  const context = useAuth();
+  console.log(context);
 
-const context = useAuth()
-console.log(context);
-
-const navigate = useNavigate()
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
-      setError("")
-      setLoading(true)
-      const response = await context.login(emailRef.current.value, passwordRef.current.value)      // Route to dashboard.
+      setError("");
+      setLoading(true);
+      const response = await context.login(
+        emailRef.current.value,
+        passwordRef.current.value
+      ); // Route to dashboard.
       console.log(response);
-      context.setCurrentUser(response)
-      navigate("/dashboard")
-    } catch(err) {
-        console.log(err)
-      setError("Failed to log in")
+      context.setCurrentUser(response);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      setError("Failed to log in");
     }
 
-    setLoading(false)
+    setLoading(false);
   }
 
   return (
-    <>
+    <div className="w-100 mt-5" style={{ maxWidth: "400px" }}>
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Log In</h2>
@@ -60,6 +62,6 @@ const navigate = useNavigate()
       <div className="w-100 text-center mt-2">
         Need an account? <Link to="/signup">Sign Up</Link>
       </div>
-    </>
-  )
+    </div>
+  );
 }
