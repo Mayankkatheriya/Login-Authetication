@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 // import { auth } from "../Firebase";
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail  } from "firebase/auth";
 
 const AuthContext = createContext();
 
@@ -25,12 +25,32 @@ const AuthProvider = ({ children }) => {
     return signOut(auth)
   }
 
+  const signInWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      setCurrentUser(user);
+      return user;
+    } catch (error) {
+      // Handle errors, e.g., display an error message to the user
+      console.error("Google Sign-In Error", error.message);
+      throw error;
+    }
+  }
+
+  const resetPassword = async (email) => {
+    return sendPasswordResetEmail(auth, email);
+  };
+
   const authData = {
     currentUser,
     setCurrentUser,
     signUp,
     login,
     logOut,
+    signInWithGoogle,
+    resetPassword,
   };
 
   return (

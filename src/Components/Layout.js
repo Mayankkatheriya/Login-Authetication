@@ -4,17 +4,17 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
+import Login from './Login'
 
 const Layout = () => {
   const context = useAuth();
-  // const navigate = useNavigate();
 //   useEffect(() => {
 //     if (Object.keys(context.currentUser.length === 0)) {
 //       navigate("/login");
 //     }
 //   });
     if (Object.keys(context.currentUser).length === 0) {
-      <Navigate to = "/login" />
+          return <Login />
     }
   return (
     <>

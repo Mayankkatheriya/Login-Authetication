@@ -35,6 +35,20 @@ export default function Login() {
     setLoading(false);
   }
 
+  const handleGoogleLogin = async () => {
+    try {
+      setError("");
+      setLoading(true);
+      await context.signInWithGoogle();
+    } catch (error) {
+      // Handle errors, e.g., display an error message to the user
+      console.error("Google Sign-In Error", error.message);
+      setError("Failed to create an account");
+    }
+    setLoading(false);
+    navigate("/");
+  };
+
   return (
     <div className="w-100 mt-5" style={{ maxWidth: "400px" }}>
       <Card>
@@ -55,8 +69,16 @@ export default function Login() {
             </Button>
           </Form>
           <div className="w-100 text-center mt-3">
-            {/* <Link to="/forgot-password">Forgot Password?</Link> */}
+            <Link to="/forgotpassword">Forgot Password?</Link>
           </div>
+          <p className="py-1 text-center">Or</p>
+          <Button
+            disabled={loading}
+            className="w-100"
+            onClick={handleGoogleLogin}
+          >
+            Sign Up with Google
+          </Button>
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">

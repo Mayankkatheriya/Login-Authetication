@@ -7,6 +7,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Dashboarrd from "./Dashboarrd";
 import Profile from "./Profile";
 import Layout from "./Layout";
+import ForgotPassword from "./ForgotPassword";
 function App() {
   const router = createBrowserRouter([
     {
@@ -31,6 +32,10 @@ function App() {
       path: "/login",
       element: <Login />,
     },
+    {
+      path: "/forgotpassword",
+      element: <ForgotPassword/>
+    }
   ]);
 
   return (
