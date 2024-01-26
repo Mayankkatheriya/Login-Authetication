@@ -5,12 +5,14 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const context = useAuth();
-  console.log(context);
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+
   const navigate = useNavigate();
 
   const handleSumbit = async (e) => {
@@ -32,7 +34,7 @@ const Signup = () => {
       setError("Failed to create an account");
     }
     setLoading(false);
-    navigate("/")
+    navigate("/");
   };
 
   const handleGoogleLogin = async () => {
@@ -41,12 +43,19 @@ const Signup = () => {
       setLoading(true);
       await context.signInWithGoogle();
     } catch (error) {
-      // Handle errors, e.g., display an error message to the user
       console.error("Google Sign-In Error", error.message);
       setError("Failed to create an account");
     }
     setLoading(false);
-    navigate("/")
+    navigate("/");
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const togglePasswordConfirmVisibility = () => {
+    setShowPasswordConfirm(!showPasswordConfirm);
   };
 
   return (
@@ -62,11 +71,35 @@ const Signup = () => {
             </Form.Group>
             <Form.Group id="password">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" ref={passwordRef} required />
+              <div className="input-group">
+                <Form.Control
+                  type={showPassword ? "text" : "password"}
+                  ref={passwordRef}
+                  required
+                />
+                <Button
+                  variant="outline-secondary"
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? <i className="fa-solid fa-eye-slash"></i> : <i className="fa-solid fa-eye"></i>}
+                </Button>
+              </div>
             </Form.Group>
             <Form.Group id="password-confirm">
               <Form.Label>Password Confirmation</Form.Label>
-              <Form.Control type="password" ref={passwordConfirmRef} required />
+              <div className="input-group">
+                <Form.Control
+                  type={showPasswordConfirm ? "text" : "password"}
+                  ref={passwordConfirmRef}
+                  required
+                />
+                <Button
+                  variant="outline-secondary"
+                  onClick={togglePasswordConfirmVisibility}
+                >
+                  {showPasswordConfirm ? <i className="fa-solid fa-eye-slash"></i> : <i className="fa-solid fa-eye"></i>}
+                </Button>
+              </div>
             </Form.Group>
             <Button disabled={loading} className="w-100 mt-4" type="submit">
               Sign Up
@@ -78,7 +111,7 @@ const Signup = () => {
             className="w-100"
             onClick={handleGoogleLogin}
           >
-            Sign Up with Google
+           <i class="fa-brands fa-google"></i> Sign Up with Google
           </Button>
         </Card.Body>
       </Card>

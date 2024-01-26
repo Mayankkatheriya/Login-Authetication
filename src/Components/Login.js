@@ -8,11 +8,14 @@ export default function Login() {
   const passwordRef = useRef();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const context = useAuth();
-  console.log(context);
-
   const navigate = useNavigate();
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -23,8 +26,7 @@ export default function Login() {
       const response = await context.login(
         emailRef.current.value,
         passwordRef.current.value
-      ); // Route to dashboard.
-      console.log(response);
+      );
       context.setCurrentUser(response);
       navigate("/");
     } catch (err) {
@@ -41,7 +43,6 @@ export default function Login() {
       setLoading(true);
       await context.signInWithGoogle();
     } catch (error) {
-      // Handle errors, e.g., display an error message to the user
       console.error("Google Sign-In Error", error.message);
       setError("Failed to create an account");
     }
@@ -62,7 +63,19 @@ export default function Login() {
             </Form.Group>
             <Form.Group id="password">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" ref={passwordRef} required />
+              <div className="input-group">
+                <Form.Control
+                  type={showPassword ? "text" : "password"}
+                  ref={passwordRef}
+                  required
+                />
+                <Button
+                  variant="outline-secondary"
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? <i className="fa-solid fa-eye-slash"></i> : <i className="fa-solid fa-eye"></i>}
+                </Button>
+              </div>
             </Form.Group>
             <Button disabled={loading} className="w-100 mt-4" type="submit">
               Log In
@@ -77,7 +90,7 @@ export default function Login() {
             className="w-100"
             onClick={handleGoogleLogin}
           >
-            Sign Up with Google
+            <i class="fa-brands fa-google"></i> Sign Up with Google
           </Button>
         </Card.Body>
       </Card>

@@ -1,7 +1,6 @@
 import app, { auth } from "../Firebase";
 import AuthProvider from "../Context/AuthProvider";
 import Signup from "./Signup";
-import { Container } from "react-bootstrap";
 import Login from "./Login";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Dashboarrd from "./Dashboarrd";
