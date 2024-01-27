@@ -8,7 +8,6 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: #a1a1a1;
 }
 
 #root {
@@ -27,6 +26,7 @@ body {
   flex-direction: column;
   width: 100%;
   align-items: center;
+  background-color: rgb(121, 250, 164);
 }
 
 header {

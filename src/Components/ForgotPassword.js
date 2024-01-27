@@ -43,7 +43,7 @@ export default function ForgotPassword() {
   // Rendering the component UI
   return (
     <div className="w-100 mt-5" style={{ maxWidth: "400px" }}>
-      <Card>
+      <Card className="shadow p-3 mb-5 bg-body rounded ">
         <Card.Body>
           <h2 className="text-center mb-4">Reset Password</h2>
           {error && <Alert variant="danger">{error}</Alert>}
