@@ -26,7 +26,7 @@ body {
   flex-direction: column;
   width: 100%;
   align-items: center;
-  background-color: rgb(121, 250, 164);
+  background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
 }
 
 header {
